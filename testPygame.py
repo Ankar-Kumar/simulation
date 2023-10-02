@@ -1,53 +1,42 @@
-# import pygame
 import pygame
+import matplotlib.pyplot as plt
+# Initialize Pygame
+pygame.init()
 
-# initializing pygame
-pygame.font.init()
+# Create a Pygame window
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Pygame Legend Example")
 
-# check whether font is initialized
-# or not
-pygame.font.get_init()
+# Define colors
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
+blue = (0, 0, 255)
 
-# create the display surface
-display_surface = pygame.display.set_mode((500, 500))
+# Main loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-# change the window screen title
-pygame.display.set_caption('Our Text')
+    # Clear the screen
+    screen.fill(white)
 
-# Create a font file by passing font file
-# and size of the font
-font1 = pygame.font.SysFont('freesanbold.ttf', 50)
-# font2 = pygame.font.SysFont('chalkduster.ttf', 40)
-
-# Render the texts that you want to display
-text1 = font1.render('GeeksForGeeks', True, (0, 255, 0))
-# text2 = font2.render('GeeksForGeeks', True, (0, 255, 0))
-
-# create a rectangular object for the
-# text surface object
-textRect1 = text1.get_rect()
-
-
-# setting center for the first text
-textRect1.center = (350, 250)
-
-
-while True:
-
-	# add background color using RGB values
-	display_surface.fill((255, 0, 0))
-
-	display_surface.blit(text1, textRect1)
+    # Draw shapes and labels for the legend
+    pygame.draw.rect(screen, red, (50, 50, 20, 20))
+    pygame.draw.rect(screen, blue, (50, 80, 20, 20))
+    font = pygame.font.Font(None, 36)
+    text_red = font.render("Red", True, black)
+    text_blue = font.render("Blue", True, black)
+    screen.blit(text_red, (80, 50))
+    screen.blit(text_blue, (80, 80))
 	
-	for event in pygame.event.get():
 
-		if event.type == pygame.QUIT:
-		
-			# deactivating the pygame library
-			pygame.quit()
-
-			# quitting the program.
-			quit()
-
-		# update the display
-		pygame.display.update()
+    # Update the display
+    pygame.display.flip()
+plt.legend()
+# Quit Pygame
+pygame.quit()
