@@ -8,12 +8,15 @@ def main():
 
     screen_size = (650, 650)
     screen = pygame.display.set_mode(screen_size)
-    f = pygame.font.get_fonts()[0] #get the font name  suppose arial
-    font1 = pygame.font.SysFont(f, 20)
+    
+    font1 = pygame.font.SysFont('arial.tft', 20)
     running = True
 
     while running:
                 screen.fill((0, 0, 0))
+        # for event in pygame.event.get():
+        #         if event.type != pygame.QUIT:
+        #           running= False
                 
                 xb, yb = np.random.randint(0, 600, 2)
                 xf, yf = (50, 50)
@@ -79,7 +82,7 @@ def main():
                 
                 break
     
-    pygame.time.delay(3000)
+    pygame.time.delay(5000)
     pygame.quit()
 
 if __name__ == '__main__':
