@@ -24,14 +24,14 @@ def main():
                         plt.text(30,47,f'Bomber caught at: {cnt}', fontsize=12)
                         plt.plot([xf, xb],[yf, yb],linestyle='-',linewidth=3)
                         print('Bomber caught at step: ' + str(cnt))
-                        plt.pause(7)
+                        plt.pause(5)
                         break
                     elif (dist >= maxDist):
                         plt.plot([xf, xb],[yf, yb],linestyle='-',linewidth=3)
                         
                         plt.text(30,47,f'Bomber escaped at: {cnt}', fontsize=12)
                         print('Bomber escaped at step: ' + str(cnt))
-                        plt.pause(7)
+                        plt.pause(5)
                         break
                     else:
                         cosA, sinA = (xb-xf)/dist, (yb-yf)/dist
@@ -46,7 +46,7 @@ def main():
                         plt.scatter(xb,yb, marker='o',color='green')
                         plt.plot(bx,by,color='green')
                         
-                        plt.pause(0.7)
+                        plt.pause(0.5)
                         
                 plt.show()
 
