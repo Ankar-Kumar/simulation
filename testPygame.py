@@ -1,42 +1,58 @@
-import pygame
+import random
+import numpy as np
 import matplotlib.pyplot as plt
-# Initialize Pygame
-pygame.init()
 
-# Create a Pygame window
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Pygame Legend Example")
+bomber_x_positions = [25]
+bomber_y_positions = [25]
+fighter_x_positions = [1]
+fighter_y_positions = [45]
+bomber_velocity = 7
+fighter_velocity = 2
 
-# Define colors
-black = (0, 0, 0)
-white = (255, 255, 255)
-red = (255, 0, 0)
-blue = (0, 0, 255)
+window_x = 50
+window_y = 50
+plt.figure(figsize=(7, 6))
+plt.axis([0, window_x, 0, window_y])
+plt.title('Pure Pursuit')
+plt.ion() 
+plt.show()
 
-# Main loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+total_time = 0
+while True:
+    total_time += 1
+    x_rand = random.randint(-bomber_velocity, bomber_velocity)
+    y_rand = random.randint(-bomber_velocity, bomber_velocity)
+    # x_rand = bomber_velocity * random.choice([-1, 1])
+    # y_rand = bomber_velocity * random.choice([-1, 1])
+    
+    new_x = max(0, min(window_x, (bomber_x_positions[-1] + x_rand)))
+    new_y = max(0, min(window_y, (bomber_y_positions[-1] + y_rand)))
+    bomber_x_positions.append(new_x)
+    bomber_y_positions.append(new_y)
 
-    # Clear the screen
-    screen.fill(white)
+    distance = np.sqrt((bomber_x_positions[-1] - fighter_x_positions[-1])**2 + 
+                       (bomber_y_positions[-1] - fighter_y_positions[-1])**2) 
 
-    # Draw shapes and labels for the legend
-    pygame.draw.rect(screen, red, (50, 50, 20, 20))
-    pygame.draw.rect(screen, blue, (50, 80, 20, 20))
-    font = pygame.font.Font(None, 36)
-    text_red = font.render("Red", True, black)
-    text_blue = font.render("Blue", True, black)
-    screen.blit(text_red, (80, 50))
-    screen.blit(text_blue, (80, 80))
-	
+    new_fighter_x = fighter_x_positions[-1] + fighter_velocity * (bomber_x_positions[-1] - fighter_x_positions[-1])/distance
+    new_fighter_y = fighter_y_positions[-1] + fighter_velocity * (bomber_y_positions[-1] - fighter_y_positions[-1])/distance
+    fighter_x_positions.append(new_fighter_x)
+    fighter_y_positions.append(new_fighter_y)
 
-    # Update the display
-    pygame.display.flip()
-plt.legend()
-# Quit Pygame
-pygame.quit()
+    colors0 = (['blue'] * (len(bomber_x_positions)-1)) + ['green']
+    colors1 = (['red'] * (len(bomber_x_positions)-1)) + ['cyan']
+    # plt.scatter(bomber_x_positions, bomber_y_positions, marker='o', color=colors0, linestyle='dashed')
+    plt.plot(bomber_x_positions, bomber_y_positions, color='blue', linestyle='dashed')
+    # plt.scatter(fighter_x_positions, fighter_y_positions, marker='o', color=colors1, linestyle='dashed') 
+    plt.plot(fighter_x_positions, fighter_y_positions, color='red', linestyle='dashed') 
+    plt.draw()
+    plt.pause(0.7)
+ 
+    print(f'distance: {distance:.2f}')
+    if distance < 6:
+        plt.text(30, 47, f'Bomber destroyed at: {total_time}', fontsize=12)
+        plt.pause(6)
+        break
+    elif distance > 27 and total_time > 10:
+        plt.text(30, 47, f'Bomber escaped at: {total_time}', fontsize=12)
+        plt.pause(6)
+        break

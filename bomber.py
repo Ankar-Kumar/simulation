@@ -24,7 +24,9 @@ mx=100
 while True:
     t+=1
     dist = math.sqrt((data[i][0]-xf[-1])**2+(data[i][1]-yf[-1])**2)
-    # print(dist)
+    pygame.draw.circle(screen, (50, 50, 250), (bx[-1], by[-1]), 2)
+    pygame.draw.circle(screen, (200, 50, 200), (fx[-1], fy[-1]), 2)
+
     if (dist <= mn):
         flag = True
         print('Bomber caught at step: ' + str(t))
