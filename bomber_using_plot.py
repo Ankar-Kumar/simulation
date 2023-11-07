@@ -27,8 +27,7 @@ def main():
                         plt.pause(5)
                         break
                     elif (dist >= maxDist):
-                        plt.plot([xf, xb],[yf, yb],linestyle='-',linewidth=3)
-                        
+                        plt.plot([xf, xb],[yf, yb],linestyle='-',linewidth=3)                        
                         plt.text(30,47,f'Bomber escaped at: {cnt}', fontsize=12)
                         print('Bomber escaped at step: ' + str(cnt))
                         plt.pause(5)
@@ -41,13 +40,14 @@ def main():
                         by.append(yb)
                         fx.append(xf)
                         fy.append(yf)
-                        plt.scatter(xf,yf, marker='o',color='red')
+                        plt.scatter(xf,yf, marker='o',color='red',label='Fighter')
                         plt.plot(fx,fy,color='red')
-                        plt.scatter(xb,yb, marker='o',color='green')
+                        plt.scatter(xb,yb, marker='o',color='green',label='Bomber')
                         plt.plot(bx,by,color='green')
                         
                         plt.pause(0.5)
-                        
+                    if cnt==1:
+                        plt.legend()        
                 plt.show()
 
 
