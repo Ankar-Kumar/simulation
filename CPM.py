@@ -26,7 +26,7 @@ for lines in open(file_path):
      duration = int(words[2])
      predecessors = words[3]
 
-     index.append(idx) #index list store idx or activity
+     index.append(idx) #  index list store idx or activity
 
 
      activities[idx] = Activity(idx, activity, duration)
@@ -59,7 +59,7 @@ for idx in index:
         activities[idx].early_finish = maxTime + activities[idx].duration
     
     # print(activities[idx].early_start, activities[idx].early_finish)
-    maxEF = max(maxEF, activities[idx].early_finish) # finish line e gia abar MAX EF time check kore store korbo
+    maxEF = activities[idx].early_finish # finish line e gia abar MAX EF time check kore store korbo
 
 # print(maxEF)
 # print(len(index))
