@@ -51,24 +51,18 @@ for idx in index:
         activities[idx].early_finish = activities[idx].duration
     else :
         maxTime = 0
-        for item in activities[idx].predecessor: # sob gula activity max EF time check korbo
-            if (maxTime < activities[item].early_finish):
-                maxTime = activities[item].early_finish
+        for item in activities[idx].predecessor:# sob gula activity max EF time check korbo
+            
+                maxTime = max(maxTime,activities[item].early_finish)
 
-        activities[idx].early_start = maxTime  # max EF time ta add kore dibo next ES time te
+        activities[idx].early_start = maxTime # max EF time ta add kore dibo next ES time te
         activities[idx].early_finish = maxTime + activities[idx].duration
     
     # print(activities[idx].early_start, activities[idx].early_finish)
-    maxEF = activities[idx].early_finish # finish line e gia abar MAX EF time check kore store korbo
+    maxEF = max(maxEF, activities[idx].early_finish) # finish line e gia abar MAX EF time check kore store korbo
 
-# print(maxEF)
-# print(len(index))
-
-# for i in range(len(index)):
-#     print(index[len(index)-i-1])
 
 length = len(index)
-
 for i in range(length):
     idx = index[length-i-1]
     if (len(activities[idx].successor) == 0):
@@ -78,7 +72,7 @@ for i in range(length):
         minTime = 99999
         for item in activities[idx].successor:
             if (minTime > activities[item].late_start):
-                minTime = activities[item].late_start
+                minTime =min ( minTime, activities[item].late_start)
             
         activities[idx].late_finish = minTime
         activities[idx].late_start = minTime - activities[idx].duration
@@ -88,10 +82,10 @@ for i in range(length):
 result = []
 
 for idx in index:
-    if (activities[idx].early_finish == activities[idx].late_finish): 
+    if (activities[idx].early_finish == activities[idx].late_finish):
         result.append(activities[idx].activity)
 
-for i in range(len(result)-1):
+for i in range(len(result)-1):    
     print(result[i] + " -> ", end="")
 
 print(result[len(result)-1])
