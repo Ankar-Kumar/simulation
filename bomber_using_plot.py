@@ -23,13 +23,13 @@ def main():
                     if (dist <= minDist):
                         plt.text(30,47,f'Bomber caught at: {cnt}', fontsize=12)
                         plt.plot([xf, xb],[yf, yb],linestyle='-',linewidth=3)
-                        print('Bomber caught at step: ' + str(cnt))
+                        print(f'Bomber caught at step:{cnt}')
                         plt.pause(5)
                         break
                     elif (dist >= maxDist):
                         plt.plot([xf, xb],[yf, yb],linestyle='-',linewidth=3)                        
                         plt.text(30,47,f'Bomber escaped at: {cnt}', fontsize=12)
-                        print('Bomber escaped at step: ' + str(cnt))
+                        print(f'Bomber escaped at step:{cnt}')
                         plt.pause(5)
                         break
                     else:

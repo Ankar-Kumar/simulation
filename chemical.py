@@ -23,9 +23,7 @@ while i <= N:
     tmp_b=b[-1]
     tmp_c=c[-1]
     tmp_t=time[-1]
-    # plt.scatter(tmp_t,tmp_a,'b')
-    # plt.scatter(tmp_t,tmp_b,'r')
-    # plt.scatter(tmp_t,tmp_c,'g')
+    
     a.append(tmp_a+(k2*tmp_c- k1*tmp_a*tmp_b)*t)
     b.append(tmp_b+(k2*tmp_c- k1*tmp_a*tmp_b)*t)
     c.append(tmp_c+(2*k1*tmp_a*tmp_b- 2*k2*tmp_c)*t)

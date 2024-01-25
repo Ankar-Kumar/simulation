@@ -12,7 +12,7 @@ def Bezier(x,y,n):
     for t in range(0, 1001):
         t /= 1000.0    #
         xt, yt = 0, 0
-        for i in range(n):
+        for i in range(n):  # 0 theke n-1
             p= (nfact * math.pow(t, i) * math.pow(1 - t, no_of_cont_point- i)) / (math.factorial(no_of_cont_point - i) * math.factorial(i))
             xt += p * x[i]
             yt += p * y[i]
@@ -22,7 +22,7 @@ def Bezier(x,y,n):
         plt.plot(x_curve,y_curve,color='red')
         plt.xlim([0,500])
         plt.ylim([0,500])
-        plt.pause(0.1)
+        plt.pause(0.51)
     for i in range(n):
          plt.scatter(x[i],y[i], marker='o',color='green') # for bullet point
 
